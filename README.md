@@ -76,6 +76,50 @@ Client-server chat applications are versatile tools that facilitate real-time co
 
 Client-server chat applications are foundational to real-time communication over networks. They incorporate principles of socket programming, communication protocols, and security mechanisms to provide a seamless user experience. Understanding the basics of client-server chat applications is essential for developers involved in networked application development, as they form the backbone of various collaborative communication systems. As technology evolves, chat applications continue to adapt, incorporating new features and technologies to enhance user interaction and connectivity.
 
+## PROGRAM 
+# Client
+~~~
+import socket
+ client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+ client.connect(("localhost", 9999))
+ done=False
+ while not done:
+    client.send(input("Message ").encode('utf-8'))
+    msg = client.recv(1024).decode('utf-8')
+    if msg == 'quit':
+        done=True
+    else:
+        print(msg)
+ client.close()
+~~~
+# Server
+~~~
+import socket
+ from base64 import decode
+ from operator import truediv
+ server =socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+ server.bind(('localhost', 9999))
+ server.listen()
+ client,addr=server.accept()
+ done = False
+ while not done:
+    msg = client.recv(1024).decode('utf-8')
+    if msg == 'quit':
+        done = True
+    else:
+        print(msg)
+    client.send(input("Message ").encode('utf-8'))
+ client.close()
+ server.close()
+~~~
+
+## OUTPUT
+# Client
+![Screenshot 2025-03-21 220150](https://github.com/user-attachments/assets/3418d2a1-7e03-461f-b824-03827eec3c6c)
+
+# Server
+![Screenshot 2025-03-21 220144](https://github.com/user-attachments/assets/2c010b7d-b496-432d-92d1-949a63abae1b)
+
 ## Result:
 
 Thus the study on Client Server Chat Applications has been performed
